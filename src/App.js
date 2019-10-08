@@ -1,25 +1,26 @@
+import './app.scss';
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import theme from 'prism-react-renderer/themes/oceanicNext';
+
+Object.entries(require('carbon-components-react')).forEach(
+  ([name, exported]) => (global[name] = exported)
+);
+
+const code = `<Button>Button</Button>`;
+
+function addContainingDiv(code) {
+  return '<div>' + code + '</div>';
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer">
-            Learn React
-          </a>
-        </header>
-      </div>
+      <LiveProvider code={code} transformCode={addContainingDiv}>
+        <LiveEditor theme={theme} />
+        <LiveError />
+        <LivePreview />
+      </LiveProvider>
     );
   }
 }
