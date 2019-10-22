@@ -16,10 +16,10 @@ function addContainingDiv(code) {
 class App extends Component {
   render() {
     return (
-      <LiveProvider code={code} transformCode={addContainingDiv}>
-        <LiveEditor theme={theme} />
-        <LiveError />
-        <LivePreview />
+      <LiveProvider className="playground" code={code} transformCode={addContainingDiv}>
+        <LiveEditor className="editor" theme={theme} />
+        <LiveError className="error" />
+        <LivePreview className="preview" />
       </LiveProvider>
     );
   }
